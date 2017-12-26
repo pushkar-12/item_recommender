@@ -1,0 +1,91 @@
+{% load staticfiles%}
+<head>
+
+	<meta name = "viewport" content = "width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+   <title>Movies</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Satisfy'/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.js"></script>
+<style>html{overflow: auto;}</style>
+</head>
+<body style="background:url('https://images.freecreatives.com/wp-content/uploads/2016/03/White-Background-Iphone-Pics-1.jpg');">
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">RecommendationEngine</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="http://127.0.0.1:8000/recommend/">Home</a></li>
+  <li><a href="{% url 'myrating' %}"><span class="glyphicon glyphicon-stats"></span> My ratings</a></li>
+    </ul>
+
+  </div>
+</nav>
+<div class="jumbotron text-center" style="background:url('https://s-media-cache-ak0.pinimg.com/originals/7c/f8/5c/7cf85c9bf5295e6efb197263e5952cb1.jpg') !important">
+  <h1 style="color:white">Movies</h1>
+  <h3 style="color:white">User-id:<strong>&nbsp;{{user_id}}</strong></h3>
+</div>
+
+{%if bestmatch == -1 and guessid == -1 %}
+<div class="alert alert-danger alert-dismissable fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <div style="text-align:center"><strong>Movie doesn't exist in our database!!</strong> Search for some other movie&nbsp;</div>
+  </div>
+{%endif%}
+
+
+
+
+<div class="container">
+
+  <div class="alert alert-info">
+  <strong>In case your movie doesn't exactly match any of the movies in our database,
+    it will look for the movie that closely matches the name you entered</strong> <br><br>
+    The list of movies has been provided below the form for reference..Make sure you rate the correct movie
+  </div>
+  <form role="form" action="{%url 'moviesearch' %}" method="post">
+	{%csrf_token%}
+  <div class="form-group">
+
+	<input type="hidden" class="form-control" name="user" id="user" value="{{user_id}}"><br>
+    <label class="lead"><strong>Search for a movie</strong></label>
+	<input type="text" class="form-control" placeholder="enter movie-name" name="movie" id="movie" required autocomplete="off"><br>
+
+    <button type="submit" class="btn btn-default">
+      <span class="glyphicon glyphicon-search"></span> Search
+    </button>
+
+</div>
+</form></div>
+
+
+
+<div class="container">
+
+  <table class="table table-striped table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th style="text-align:center"><strong>Movie-id</strong></th>
+        <th style="text-align:center"><strong>Movie</strong></strong></th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+      {%for element in list%}
+        <tr height="15">
+        <td style="text-align:center">{{forloop.counter}}</td>
+        <td style="text-align:center">{{element}}</td>
+
+        </tr>
+
+        {%endfor%}
+
+
+    </tbody>
+  </table>
+</div>

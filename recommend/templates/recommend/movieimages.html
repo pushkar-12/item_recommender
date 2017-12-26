@@ -1,0 +1,168 @@
+{% load staticfiles%}
+<html>
+  <head>
+
+	<meta name = "viewport" content = "width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Source Code Pro' rel='stylesheet'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<style>
+
+
+
+
+	body{
+		padding: 0px;
+
+	}
+	#nav{
+		padding: 25px;
+		text-align: right;
+		font-size: 10px;
+		margin-top: 125px;
+
+	}
+	.container{
+
+	}
+	#dis{
+		margin-top: -130px;
+
+	}
+	#action{
+		color: white;
+		text-align: center;
+		margin-top: -80px;
+	}
+	#opacity{
+		opacity:1;
+	}
+	.thumbnail{
+
+		position: relative;
+		background: black;
+		color: white;
+	}
+
+	.img{
+		opacity: 1;
+		display: block;
+
+
+	}
+
+	.middle{
+		background: black;
+		opacity: 0.3;
+		border-radius: 5px;
+		transition: 1s ease;
+		position: absolute;
+	    bottom:10px;
+	    left:0;
+	    right: 0;
+		height: 0;
+		overflow: hidden;
+	}
+
+	.thumbnail:hover .middle{
+		height:15%;
+		opacity: 1;
+
+	}
+	.thumbnail:hover .text{
+		opacity: 1;
+	}
+
+	.glyphicon-heart{
+		font-size: 40px;
+		color:  #cc0000;
+
+
+
+	}
+	.glyphicon-heart-empty{
+		font-size: 35px;
+		color:black;
+		opacity:0.35;
+	}
+	.heart:hover .middle{
+		height:15%;
+	}
+
+
+
+    @keyframes BackgroundAnimated {
+    from {
+        background-position:0 0
+    }
+    to {
+        background-position:100% 0
+    }
+}
+
+
+</style>
+
+
+
+</head>
+<body style="background:url('http://slodive.com/wp-content/uploads/2011/05/white-black-backgrounds/abstract.jpg');">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+
+
+
+      <div class="navbar-header">
+
+		  <a class="navbar-brand" href="#"><strong>RecommendationEngine</strong></a>
+    </div>
+    <ul class="nav navbar-nav">
+		<li><a href="{% url 'searchmoviebyalphabet' %}"><strong>Back</strong></a></li>
+      <li class="active"><a href="{% url 'index' %}"><strong>Home</strong></a></li>
+		<li><a href="{% url 'authenticate' %}"><strong>Rate a movie</strong></a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'myrating' %}"><span class="glyphicon glyphicon-stats"></span> My ratings</a></li>
+		<li><a href="{% url 'newuser' %}"><span class="glyphicon glyphicon-user"></span><strong> Get user-id</strong></a></li>
+
+    </ul>
+  </div>
+</nav>
+
+
+<div class="col-sm-12" >
+
+			<div class ="panel" style="padding-top: 0cm;font-family: 'Merriweather';font-size: 25px;"><center><strong>SEARCH RESULTS: '{{alpha}}'</strong></center></div>
+			<div class="row text-center row-eq-height" >
+
+              {%for item in list%}
+				<div class="col-sm-4" style="padding-left: 0.5cm;padding-right:0.5cm;padding-bottom:1cm">
+					<div class="thumbnail" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" >
+
+                        <a href="https://www.rottentomatoes.com/m/{{item.modifiedname}}/"><img src="{{item.url}}" class="img" style="height: 500px;width: 450px;"></a>
+
+                        <!--<div class="middle ">
+							<div class="text" container><button class="btn heart" style="background: black"><span class="glyphicon glyphicon-heart"></span></button>
+						<span class="badge">2</span>
+						</div>
+					</div>-->
+
+						<p style="font-size: 16px;font-family:'Merriweather';white-space: nowrap;overflow: hidden;">{{item.name}}</p>
+						<!--<CAPTION>{{item.name}}</CAPTION>-->
+					</div>
+				</div>
+                {%endfor%}
+
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+
+<head>
+
+	<meta name = "viewport" content = "width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+   <title>Recommender</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Satisfy'/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.js"></script>
+
+</head>
+
+<body style="background:url('https://images.freecreatives.com/wp-content/uploads/2016/03/White-Background-Iphone-Pics-1.jpg');">
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">RecommendationEngine</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{%url 'index'%}">Home</a></li>
+        <li><a href="{% url 'searchmoviebyalphabet' %}">Movie Posters</a></li>
+
+    </ul>
+
+  </div>
+</nav>
+<div class="jumbotron text-center" style="background:url('https://s-media-cache-ak0.pinimg.com/originals/7c/f8/5c/7cf85c9bf5295e6efb197263e5952cb1.jpg') !important">
+  <h1 style="color:white">Authentication</h1>
+</div>
+{%if id != -1 and count == -1 %}
+<div class="alert alert-success alert-dismissable fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <div style="text-align:center"><strong>Success!</strong> Your user-id is&nbsp; <strong>{{id}}</strong></div>
+  </div>
+{%endif%}
+{%if id > count and count != -1%}
+
+<div class="alert alert-danger alert-dismissable fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <div style="text-align:center"><strong>Invalid user-id!! enter the correct id provided to you</strong></div>
+  </div>
+{%endif%}
+<div class="container">
+<div class="row">
+	<div class="col-sm-12"><form role="form" action="{%url 'ihaverated' %}" method="post">
+	{%csrf_token%}
+<div class="form-group">
+    <label class="lead" ><strong>Enter user-id</strong></label>
+	<input type="text" class="form-control" placeholder="enter user-id" name="user" id="user" autofocus><br>
+
+    <button type="submit" class="btn btn-default">
+      <span class="glyphicon glyphicon-star"></span> Rate
+    </button>
+
+</div>
+</form></div>
+
+
+</div>
+</div>
+</body>
